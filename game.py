@@ -117,12 +117,15 @@ class BotRunner:
 
     def simulation_running_normal(self, surface):
         """High-level running simulation at normal speed."""
-        self.process_game_buttons()
-        self.draw_running_simulation(surface)
+        self.simulation_running(surface)
         time.sleep(self.properties.sleep_time)
 
     def simulation_running_ff(self, surface):
         """High-level running simulation at unrestricted speed."""
+        self.simulation_running(surface)
+
+    def simulation_running(self, surface):
+        """Shared method between the normal and ff modes."""
         self.process_game_buttons()
         self.draw_running_simulation(surface)
 
