@@ -60,13 +60,16 @@ class BotRunner:
         while self.properties.running:
             self.process_pygame_events()
 
+            # Paused state
             if self.properties.state == self.states.paused:
                 self.paused(display_surface)
+            # Normal speed
             elif self.properties.state == self.states.normal_speed:
-                self.draw_running_simulation(display_surface)
-                time.sleep(self.properties.sleep_time)
+                self.simulation_running_normal(display_surface)
+            # Fast-forward
             elif self.properties.state == self.states.fast_forward:
-                self.draw_running_simulation(display_surface)
+                self.simulation_running_ff(display_surface)
+
             else:
                 raise Exception("Invalid state.")
 
@@ -74,6 +77,10 @@ class BotRunner:
 
         # Quit pygame
         pg.quit()
+
+    ##############
+    # STRUCTURAL #
+    ##############
 
     def process_pygame_events(self):
         """Process all of the pygame events pulled from pg.event.get()."""
@@ -91,6 +98,10 @@ class BotRunner:
         """Process any button events pn the main menu."""
         pass
 
+    ##########
+    # PAUSED #
+    ##########
+
     def paused(self, surface):
         """High-level pause screen."""
         self.process_game_buttons()
@@ -100,8 +111,18 @@ class BotRunner:
         """Draw the main menu on the display surface."""
         surface.fill(self.properties.background_color)
 
-    def simulation_running(self, surface):
-        """High-level running simulation"""
+    ################
+    # GAME RUNNING #
+    ################
+
+    def simulation_running_normal(self, surface):
+        """High-level running simulation at normal speed."""
+        self.process_game_buttons()
+        self.draw_running_simulation(surface)
+        time.sleep(self.properties.sleep_time)
+
+    def simulation_running_ff(self, surface):
+        """High-level running simulation at unrestricted speed."""
         self.process_game_buttons()
         self.draw_running_simulation(surface)
 
