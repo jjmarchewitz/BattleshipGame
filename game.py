@@ -135,6 +135,16 @@ class BotRunner:
         surface.fill(self.properties.background_color)
 
 
+class Grid:
+    def __init__(self):
+        pass
+
+
+class Ship:
+    def __init__(self):
+        pass
+
+
 # Guard to prevent this script from being executed when imported. "__name__" won't equal
 # "__main__" unless this script is run from the command line to protect it from running.
 if __name__ == "__main__":
