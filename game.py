@@ -144,8 +144,7 @@ class BotRunner:
 class Board:
     def __init__(self):
         columns = [str(i + 1) for i in range(10)]
-        rows_str = "ABCDEFGHIJ"
-        rows = [str(i) for i in rows_str]
+        rows = [str(i) for i in "ABCDEFGHIJ"]
         self.grid = {}
 
         for row in rows:
