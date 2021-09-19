@@ -37,6 +37,9 @@ class BotRunner:
             "PLAY/PAUSE": None,
         }
 
+        self.bot_a_board = Board()
+        self.bot_b_board = Board()
+
         self.run()
 
     def run(self):
@@ -55,6 +58,9 @@ class BotRunner:
         pg.display.set_caption("Battleship")
         window_icon = pg.image.load("Assets/window_icon.png")
         pg.display.set_icon(window_icon)
+
+        self.bot_a_board.grid["A"]["1"] = "X"
+        breakpoint()
 
         # Main display loop
         while self.properties.running:
@@ -135,9 +141,18 @@ class BotRunner:
         surface.fill(self.properties.background_color)
 
 
-class Grid:
+class Board:
     def __init__(self):
-        pass
+        columns = [str(i + 1) for i in range(10)]
+        rows_str = "ABCDEFGHIJ"
+        rows = [str(i) for i in rows_str]
+        self.grid = {}
+
+        for row in rows:
+            single_row_dict = {}
+            for column in columns:
+                single_row_dict.update({column: None})
+            self.grid.update({row: single_row_dict})
 
 
 class Ship:
